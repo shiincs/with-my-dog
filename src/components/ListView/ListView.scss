@@ -1,0 +1,104 @@
+@import '../../styles/commons.scss';
+
+@include mobile {
+  .searchSection {
+    width: 100%;
+    height: 100vh;
+
+    .readableHidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    .searchForm {
+      fieldset {
+        text-align: center;
+      }
+
+      .searchInput {
+        width: 90%;
+        display: inline-block;
+        border-radius: 5px;
+        background: #eee;
+        font-size: 1.2rem;
+        padding: 5px 10px;
+      }
+    }
+
+    .categoryList {
+      display: flex;
+
+      .categoryItem {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+
+        a {
+          width: 80%;
+          color: #181818;
+          border: 1px solid black;
+          text-decoration: none;
+          text-align: center;
+        }
+      }
+    }
+
+    .searchList {
+      background: #eee;
+      padding: 10px;
+
+      .searchItem {
+        width: 100%;
+        margin: 0 auto 10px;
+        background: #fff;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .searchSection {
+    width: 20vw;
+    height: 100vh;
+
+    .readableHidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    .categoryList {
+      display: flex;
+
+      .categoryItem {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+
+        a {
+          width: 80%;
+          color: #181818;
+          border: 1px solid black;
+          text-decoration: none;
+          text-align: center;
+        }
+      }
+    }
+
+    .searchList {
+      background: #eee;
+      padding: 10px;
+
+      .searchItem {
+        width: 100%;
+        margin: 0 auto 10px;
+        background: #fff;
+      }
+    }
+  }
+}
