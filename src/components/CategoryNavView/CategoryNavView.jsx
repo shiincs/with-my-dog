@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 const CategoryNavView = props => {
   return (
-    <>
+    <section className={cx('categorySection')}>
       <h2 className={cx('readableHidden')}>카테고리 메뉴</h2>
       <ul className={cx('categoryList')}>
         <li className={cx('categoryItem')}>
@@ -43,7 +43,7 @@ const CategoryNavView = props => {
           )}
         </li>
       </ul>
-    </>
+    </section>
   );
 };
 
