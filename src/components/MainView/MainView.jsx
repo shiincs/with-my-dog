@@ -14,9 +14,9 @@ const MainView = props => {
   return (
     <div className={cx('mainWrapper')}>
       <LayoutContianer>
-        <CategoryNavContainer />
+        <CategoryNavContainer {...props} />
         <SearchFormContainer />
-        <SearchListContainer />
+        <SearchListContainer {...props} />
         <MapContainer />
       </LayoutContianer>
     </div>
