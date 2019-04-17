@@ -1,0 +1,46 @@
+@import '../../styles/commons.scss';
+
+@include mobile {
+  .categoryList {
+    display: flex;
+
+    .categoryItem {
+      width: 25%;
+      display: flex;
+      justify-content: center;
+
+      a {
+        width: 80%;
+        color: #181818;
+        border: 1px solid black;
+        text-decoration: none;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .categoryList {
+    display: flex;
+
+    .categoryItem {
+      width: 25%;
+      display: flex;
+      justify-content: center;
+      padding: 0 2%;
+
+      &.mapListToggle {
+        display: none;
+      }
+
+      a {
+        width: 100%;
+        color: #181818;
+        border: 1px solid black;
+        text-decoration: none;
+        text-align: center;
+      }
+    }
+  }
+}

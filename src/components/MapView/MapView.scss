@@ -2,8 +2,10 @@
 
 @include mobile {
   .mapEl {
+    position: absolute !important;
+    bottom: 0;
     width: 100%;
-    height: 70vh;
+    height: 80vh;
   }
 
   .infoOverlay {
