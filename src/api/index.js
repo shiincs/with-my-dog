@@ -32,19 +32,16 @@ const fakeDatabase = {
   ],
 };
 
-const delay = ms =>
-  new Promise(resolve => setTimeout(resolve(fakeDatabase.list), ms));
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const fetchList = async category => {
-  console.log('1111111111');
-  await delay(2000).then(resolve => {
+  return await delay(1000).then(() => {
     // if (Math.random() > 0.5) {
     //   throw new Error('Boom!');
     // }
     switch (category) {
       case 'all':
-        console.log(resolve);
-        return resolve;
+        return fakeDatabase.list;
       case 'restaurant':
         return fakeDatabase.filter(item => item.category === 'restaurant');
       case 'cafe':
