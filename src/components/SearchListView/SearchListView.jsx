@@ -7,11 +7,24 @@ import styles from './SearchListView.scss';
 const cx = classNames.bind(styles);
 
 const SearchListView = props => {
+  const { list, isListOpen } = props;
+
   return (
-    <ul className={cx('searchList')}>
-      <li className={cx('searchItem')}>검색결과</li>
-      <li className={cx('searchItem')}>검색결과</li>
-      <li className={cx('searchItem')}>검색결과</li>
+    <ul className={cx('searchList', { open: isListOpen })}>
+      {list.map(item => {
+        return (
+          <li key={item.id} className={cx('searchItem')}>
+            <figure>
+              <figcaption>
+                <dt>
+                  <a href={item.url}>{item.title}</a>
+                </dt>
+                <dl>{item.address}</dl>
+              </figcaption>
+            </figure>
+          </li>
+        );
+      })}
     </ul>
   );
 };
