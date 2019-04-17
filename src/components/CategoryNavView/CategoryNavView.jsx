@@ -6,7 +6,7 @@ import styles from './CategoryNavView.scss';
 
 const cx = classNames.bind(styles);
 
-const CategoryNavView = () => {
+const CategoryNavView = props => {
   return (
     <>
       <h2 className={cx('readableHidden')}>카테고리 메뉴</h2>
@@ -22,6 +22,25 @@ const CategoryNavView = () => {
         </li>
         <li className={cx('categoryItem')}>
           <a href="#">주점</a>
+        </li>
+        <li className={cx('categoryItem', 'mapListToggle')}>
+          {props.isListOpen ? (
+            <a
+              href="#"
+              className={cx('listToMap')}
+              onClick={() => props.handleMapListToggle()}
+            >
+              지도
+            </a>
+          ) : (
+            <a
+              href="#"
+              className={cx('mapToList')}
+              onClick={() => props.handleMapListToggle()}
+            >
+              목록
+            </a>
+          )}
         </li>
       </ul>
     </>
