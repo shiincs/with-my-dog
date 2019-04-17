@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import ListView from '../components/ListView/ListView';
+import MainView from '../components/MainView/MainView';
 
 export default class ListContainer extends Component {
   render() {
-    return <ListView />;
+    return <MainView />;
   }
 }

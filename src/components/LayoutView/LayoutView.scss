@@ -1,0 +1,45 @@
+@import '../../styles/commons.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+
+  .appTitle {
+    font-size: 1.3rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .navButton {
+    position: absolute;
+    left: 0;
+
+    .btn {
+      color: black;
+      text-decoration: none;
+    }
+  }
+
+  .navMenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid blue;
+    width: 60%;
+    height: 100vh;
+  }
+
+  .addPlaceButton {
+    position: absolute;
+    right: 0;
+
+    .btn {
+      color: black;
+      text-decoration: none;
+    }
+  }
+}

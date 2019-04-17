@@ -1,11 +1,9 @@
-/* global naver */
 /* global daum */
 
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './MapView.scss';
-import * as api from '../../api';
 
 const cx = classNames.bind(styles);
 
@@ -28,8 +26,8 @@ export default class MapView extends Component {
   }
 
   drawMarker(category, map) {
-    const data = api.fetchList(category);
-
+    const { list } = this.props;
+    const data = list;
     for (let i = 0; i < data.length; i++) {
       let marker = new daum.maps.Marker({
         map, // 마커를 표시할 지도

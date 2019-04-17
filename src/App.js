@@ -1,17 +1,16 @@
-/* global naver */
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
 
 import './App.scss';
-import ListContainer from './containers/ListContainer';
-import MapContainer from './containers/MapContainer';
+import MainContainer from './containers/MainContainer';
 
 class App extends Component {
   render() {
     return (
-      <>
-        <ListContainer />
-        {/* <MapContainer /> */}
-      </>
+      <Provider store={store}>
+        <MainContainer />
+      </Provider>
     );
   }
 }

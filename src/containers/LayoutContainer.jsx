@@ -3,6 +3,12 @@ import LayoutView from '../components/LayoutView/LayoutView';
 
 export default class LayoutContainer extends Component {
   render() {
-    return <LayoutView />;
+    const { children } = this.props;
+    return (
+      <>
+        <LayoutView />
+        {children}
+      </>
+    );
   }
 }

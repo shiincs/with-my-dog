@@ -1,4 +1,4 @@
-import { resolve } from 'dns';
+// import { resolve } from 'dns';
 
 const fakeDatabase = {
   list: [
@@ -32,19 +32,27 @@ const fakeDatabase = {
   ],
 };
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = ms =>
+  new Promise(resolve => setTimeout(resolve(fakeDatabase.list), ms));
 
-export const fetchList = category => {
-  switch (category) {
-    case 'all':
-      return fakeDatabase.list;
-    case 'restaurant':
-      return fakeDatabase.filter(item => item.category === 'restaurant');
-    case 'cafe':
-      return fakeDatabase.filter(item => item.category === 'cafe');
-    case 'pub':
-      return fakeDatabase.filter(item => item.category === 'pub');
-    default:
-      throw new Error(`Unknown category: ${category}`);
-  }
+export const fetchList = async category => {
+  console.log('1111111111');
+  await delay(2000).then(resolve => {
+    // if (Math.random() > 0.5) {
+    //   throw new Error('Boom!');
+    // }
+    switch (category) {
+      case 'all':
+        console.log(resolve);
+        return resolve;
+      case 'restaurant':
+        return fakeDatabase.filter(item => item.category === 'restaurant');
+      case 'cafe':
+        return fakeDatabase.filter(item => item.category === 'cafe');
+      case 'pub':
+        return fakeDatabase.filter(item => item.category === 'pub');
+      default:
+        throw new Error(`Unknown category: ${category}`);
+    }
+  });
 };

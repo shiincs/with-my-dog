@@ -1,0 +1,16 @@
+.searchForm {
+  padding: 10px;
+
+  fieldset {
+    text-align: center;
+  }
+
+  .searchInput {
+    width: 80%;
+    display: inline-block;
+    border-radius: 5px;
+    background: #ccc;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+  }
+}
