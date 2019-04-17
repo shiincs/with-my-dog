@@ -43,11 +43,11 @@ export const fetchList = async category => {
       case 'all':
         return fakeDatabase.list;
       case 'restaurant':
-        return fakeDatabase.filter(item => item.category === 'restaurant');
+        return fakeDatabase.list.filter(item => item.category === 'restaurant');
       case 'cafe':
-        return fakeDatabase.filter(item => item.category === 'cafe');
+        return fakeDatabase.list.filter(item => item.category === 'cafe');
       case 'pub':
-        return fakeDatabase.filter(item => item.category === 'pub');
+        return fakeDatabase.list.filter(item => item.category === 'pub');
       default:
         throw new Error(`Unknown category: ${category}`);
     }
