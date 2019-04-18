@@ -10,7 +10,7 @@
     width: 100%;
     height: 80vh;
     z-index: 100;
-    transition: bottom 1s;
+    transition: bottom 0.5s;
 
     &.open {
       bottom: 0;
