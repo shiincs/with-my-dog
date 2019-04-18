@@ -11,12 +11,11 @@
   .infoOverlay {
     position: fixed;
     left: 0;
-    bottom: 50px;
+    bottom: 0;
     width: 100%;
-    height: 100px;
-    background: red;
+    height: 150px;
+    background: rgba(255, 255, 255, .93);
     display: inline-block;
-    z-index: 500 !important;
   }
 }
 
@@ -27,5 +26,12 @@
     position: absolute !important;
     top: 0;
     right: 0;
+  }
+
+  .infoOverlay {
+    height: 100%;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid #181818;
+    padding: 10px;
   }
 }
