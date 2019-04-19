@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 
@@ -12,21 +13,20 @@ const CategoryNavView = props => {
       <h2 className={cx('readableHidden')}>카테고리 메뉴</h2>
       <ul className={cx('categoryList')}>
         <li className={cx('categoryItem')}>
-          <a href="#">모두</a>
+          <Link to="/">모두</Link>
         </li>
         <li className={cx('categoryItem')}>
-          <a href="#">식당</a>
+          <Link to="/restaurant">식당</Link>
         </li>
         <li className={cx('categoryItem')}>
-          <a href="#">카페</a>
+          <Link to="/cafe">카페</Link>
         </li>
         <li className={cx('categoryItem')}>
-          <a href="#">주점</a>
+          <Link to="/pub">주점</Link>
         </li>
         <li className={cx('categoryItem', 'mapListToggle')}>
           {props.isListOpen ? (
             <a
-              href="#"
               className={cx('listToMap')}
               onClick={() => props.handleMapListToggle()}
             >
@@ -34,7 +34,6 @@ const CategoryNavView = props => {
             </a>
           ) : (
             <a
-              href="#"
               className={cx('mapToList')}
               onClick={() => props.handleMapListToggle()}
             >
