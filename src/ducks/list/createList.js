@@ -31,7 +31,7 @@ const createList = category => {
       case FETCH_LIST_FAILURE:
         return false;
       default:
-        return false;
+        return state;
     }
   };
 
