@@ -16,7 +16,7 @@ const SearchFormView = () => {
           className={cx('searchInput')}
           placeholder="장소를 검색하세요!"
         />
-        <input type="button" value="검색" />
+        {/* <input type="button" value="검색" /> */}
       </fieldset>
     </form>
   );
