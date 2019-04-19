@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import MapView from '../components/MapView/MapView';
 import {
@@ -9,7 +10,7 @@ import {
   fetchList,
 } from '../ducks/list';
 
-class MapContainer extends Component {
+class MapContainer extends PureComponent {
   componentDidMount() {
     this.fetchData();
   }
@@ -33,8 +34,15 @@ class MapContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const category = 'all';
+const mapStateToProps = (
+  state,
+  {
+    match: {
+      params: { category },
+    },
+  }
+) => {
+  category = category || 'all';
   return {
     list: getVisibleList(state, category),
     isFetching: getIsFetching(state, category),
@@ -43,9 +51,11 @@ const mapStateToProps = state => {
   };
 };
 
-MapContainer = connect(
-  mapStateToProps,
-  { fetchList }
-)(MapContainer);
+MapContainer = withRouter(
+  connect(
+    mapStateToProps,
+    { fetchList }
+  )(MapContainer)
+);
 
 export default MapContainer;
