@@ -17,7 +17,9 @@ const SearchListView = props => {
             <figure>
               <figcaption>
                 <dt>
-                  <a href={item.url}>{item.title}</a>
+                  <a href={item.url} target="_blank">
+                    {item.title}
+                  </a>
                 </dt>
                 <dl>{item.address}</dl>
               </figcaption>
