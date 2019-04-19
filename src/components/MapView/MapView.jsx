@@ -1,13 +1,14 @@
 /* global daum */
 
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import classNames from 'classnames/bind';
+import _ from 'lodash';
 
 import styles from './MapView.scss';
 
 const cx = classNames.bind(styles);
 
-export default class MapView extends Component {
+export default class MapView extends PureComponent {
   state = {
     onMarker: false,
   };
@@ -17,7 +18,7 @@ export default class MapView extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.list !== prevProps.list) {
+    if (!_.isEqual(this.props.list, prevProps.list)) {
       this.handleMap();
     }
   }
@@ -47,10 +48,6 @@ export default class MapView extends Component {
     /* 마커를 그린다 */
     this.drawMarker(daumMap, list);
   }
-
-  // handleMarker() {
-  //   this.setState(prevProps => ({ onMarker: !prevProps }));
-  // }
 
   drawMarker(map, list) {
     const markers = [];
@@ -110,9 +107,6 @@ export default class MapView extends Component {
     for (let i = 0; i < list.length; i++) {
       daum.maps.event.addListener(markers[i], 'click', function() {
         /* 마커 클릭에 대한 이벤트이기 때문에 이벤트 발생 시 this는 마커에 묶이게 된다 */
-        // map.setCenter(
-        //   new daum.maps.LatLng(list[i].latitude, list[i].longitude)
-        // );
         overlays.forEach(overlay => overlay.setMap(null));
         overlays[i].setMap(map);
         if (!bindThis.state.onMarker) {
