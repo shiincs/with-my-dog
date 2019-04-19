@@ -91,7 +91,9 @@ export default class MapView extends PureComponent {
         <div class="infoOverlay">
           <figure>
             <figcaption>
-              <dt><a href='${list[i].url}'>${list[i].title}</a></dt>
+              <dt><a href='${list[i].url}' target='_blank'>${
+        list[i].title
+      }</a></dt>
               <dl>${list[i].address}</dl>
             </figcaption>
           </figure>
@@ -105,6 +107,7 @@ export default class MapView extends PureComponent {
         position: marker.getPosition(),
         xAnchor: 0.45,
         yAnchor: 1.65,
+        clickable: true,
       });
 
       /* 인포윈도우 생성 */
