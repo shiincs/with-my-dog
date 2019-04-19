@@ -11,10 +11,10 @@ const LayoutView = props => {
   return (
     <>
       <header className={cx('header')}>
-        <h1 className={cx('appTitle')}>With My Dog</h1>
+        <h1 className={cx('appTitle')}>같이가개</h1>
         <div className={cx('navButton')}>
           <a className={cx('btn')} onClick={() => handleNavMenu()}>
-            햄버거메뉴
+            메뉴
           </a>
         </div>
         <nav className={cx('navMenu', { open: isNavMenuOpen })}>
@@ -29,7 +29,7 @@ const LayoutView = props => {
           <a onClick={() => handleNavMenu()}>닫기</a>
         </nav>
         <div className={cx('addPlaceButton')}>
-          <a className={cx('btn')}>장소 등록하기</a>
+          <a className={cx('btn')}>장소 등록</a>
         </div>
       </header>
       <div

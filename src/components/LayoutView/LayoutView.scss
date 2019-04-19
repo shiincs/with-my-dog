@@ -3,18 +3,19 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
   padding: 10px;
 
   .appTitle {
-    font-size: 1.3rem;
-    position: relative;
+    font-size: 1.1rem;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
 
   .navButton {
-    position: absolute;
+    position: relative;
     left: 0;
 
     .btn {
@@ -41,7 +42,7 @@
   }
 
   .addPlaceButton {
-    position: absolute;
+    position: relative;
     right: 0;
 
     .btn {
