@@ -24,13 +24,20 @@
   }
 
   .navMenu {
-    display: none;
     position: absolute;
     top: 0;
-    left: 0;
-    border: 1px solid blue;
-    width: 60%;
+    left: -70%;
+    border: 1px solid #181818;
+    background: #fff;
+    width: 70%;
     height: 100vh;
+    z-index: 200;
+    transition: left .3s;
+    font-size: 1.3rem;
+
+    &.open {
+      left: 0;
+    }
   }
 
   .addPlaceButton {
@@ -41,5 +48,33 @@
       color: black;
       text-decoration: none;
     }
+  }
+}
+
+.navMenuOverlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: #181818;
+  opacity: .6;
+  z-index: 100;
+
+  &.open {
+    display: block;
+  }
+}
+
+
+@include mobile {
+  .navMenuOverlay {
+    width: 100%;
+  }
+}
+
+@include desktop {
+  .navMenuOverlay {
+    width: 20%;
   }
 }
