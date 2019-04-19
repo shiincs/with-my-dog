@@ -17,7 +17,7 @@ export default class MapView extends PureComponent {
   };
 
   componentDidMount() {
-    console.log(daum);
+    console.log(window.daum);
     this.handleMap();
   }
 
@@ -38,16 +38,19 @@ export default class MapView extends PureComponent {
     let mapOptions = {
       center:
         list.length > 0
-          ? new daum.maps.LatLng(list[0].latitude, list[0].longitude)
-          : new daum.maps.LatLng(37.552617, 126.904614),
+          ? new window.daum.maps.LatLng(list[0].latitude, list[0].longitude)
+          : new window.daum.maps.LatLng(37.552617, 126.904614),
       level: 3,
     };
 
     /* 맵 생성 */
-    let daumMap = new daum.maps.Map(el, mapOptions);
+    let daumMap = new window.daum.maps.Map(el, mapOptions);
 
     /* 카피라이트 위치를 우하단으로 변경*/
-    daumMap.setCopyrightPosition(daum.maps.CopyrightPosition.BOTTOMRIGHT, true);
+    daumMap.setCopyrightPosition(
+      window.daum.maps.CopyrightPosition.BOTTOMRIGHT,
+      true
+    );
 
     /* 마커를 그린다 */
     this.drawMarker(daumMap, list);
@@ -67,20 +70,23 @@ export default class MapView extends PureComponent {
     };
 
     for (let i = 0; i < list.length; i++) {
-      const imageSize = new daum.maps.Size(33, 33); // 마커이미지의 크기입니다
-      const imageOption = { offset: new daum.maps.Point(0, 35) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      const imageSize = new window.daum.maps.Size(33, 33); // 마커이미지의 크기입니다
+      const imageOption = { offset: new window.daum.maps.Point(0, 35) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
       // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-      const markerImage = new daum.maps.MarkerImage(
+      const markerImage = new window.daum.maps.MarkerImage(
         imageSrc(list, i),
         imageSize,
         imageOption
       );
 
       /* 마커를 찍는다 */
-      let marker = new daum.maps.Marker({
+      let marker = new window.daum.maps.Marker({
         map, // 마커를 표시할 지도
-        position: new daum.maps.LatLng(list[i].latitude, list[i].longitude), // 마커를 표시할 위치
+        position: new window.daum.maps.LatLng(
+          list[i].latitude,
+          list[i].longitude
+        ), // 마커를 표시할 위치
         title: list[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됨
         image: markerImage,
       });
@@ -102,7 +108,7 @@ export default class MapView extends PureComponent {
       `;
 
       /* 오버레이 생성 */
-      let overlay = new daum.maps.CustomOverlay({
+      let overlay = new window.daum.maps.CustomOverlay({
         content: content,
         map: map,
         position: marker.getPosition(),
@@ -133,7 +139,7 @@ export default class MapView extends PureComponent {
     const bindThis = this;
 
     for (let i = 0; i < list.length; i++) {
-      daum.maps.event.addListener(markers[i], 'click', function() {
+      window.daum.maps.event.addListener(markers[i], 'click', function() {
         /* 마커 클릭에 대한 이벤트이기 때문에 이벤트 발생 시 this는 마커에 묶이게 된다 */
         overlays.forEach(overlay => overlay.setMap(null));
         overlays[i].setMap(map);
@@ -143,7 +149,7 @@ export default class MapView extends PureComponent {
       });
     }
 
-    daum.maps.event.addListener(map, 'click', function() {
+    window.daum.maps.event.addListener(map, 'click', function() {
       if (bindThis.state.onMarker) {
         overlays.forEach(overlay => overlay.setMap(null));
         handleMarker(false);
@@ -152,7 +158,7 @@ export default class MapView extends PureComponent {
   }
 
   render() {
-    console.log(daum);
+    console.log(window.daum);
     return <div id="mapEl" className={cx('mapEl')} />;
   }
 }
