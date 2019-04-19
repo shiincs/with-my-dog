@@ -17,6 +17,7 @@ export default class MapView extends PureComponent {
   };
 
   componentDidMount() {
+    console.log(daum);
     this.handleMap();
   }
 
@@ -151,6 +152,7 @@ export default class MapView extends PureComponent {
   }
 
   render() {
+    console.log(daum);
     return <div id="mapEl" className={cx('mapEl')} />;
   }
 }
