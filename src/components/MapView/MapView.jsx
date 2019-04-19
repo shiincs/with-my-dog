@@ -5,6 +5,9 @@ import classNames from 'classnames/bind';
 import _ from 'lodash';
 
 import styles from './MapView.scss';
+import marker_bar from '../../assets/images/Marker_Bar.svg';
+import marker_cafe from '../../assets/images/Marker_Cafe.svg';
+import marker_restaurant from '../../assets/images/Marker_Restaurant.svg';
 
 const cx = classNames.bind(styles);
 
@@ -52,13 +55,33 @@ export default class MapView extends PureComponent {
   drawMarker(map, list) {
     const markers = [];
     const overlays = [];
+    const imageSrc = (list, i) => {
+      if (list[i].category === 'restaurant') {
+        return marker_restaurant;
+      } else if (list[i].category === 'cafe') {
+        return marker_cafe;
+      } else if (list[i].category === 'pub') {
+        return marker_bar;
+      }
+    };
 
     for (let i = 0; i < list.length; i++) {
+      const imageSize = new daum.maps.Size(35, 35); // 마커이미지의 크기입니다
+      const imageOption = { offset: new daum.maps.Point(0, 35) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+      const markerImage = new daum.maps.MarkerImage(
+        imageSrc(list, i),
+        imageSize,
+        imageOption
+      );
+
       /* 마커를 찍는다 */
       let marker = new daum.maps.Marker({
         map, // 마커를 표시할 지도
         position: new daum.maps.LatLng(list[i].latitude, list[i].longitude), // 마커를 표시할 위치
         title: list[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됨
+        image: markerImage,
       });
 
       markers.push(marker);
@@ -80,7 +103,8 @@ export default class MapView extends PureComponent {
         content: content,
         map: map,
         position: marker.getPosition(),
-        yAnchor: 1.8,
+        xAnchor: 0.45,
+        yAnchor: 1.65,
       });
 
       /* 인포윈도우 생성 */
