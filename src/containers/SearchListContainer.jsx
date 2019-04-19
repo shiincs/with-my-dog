@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import SearchListView from '../components/SearchListView/SearchListView';
 import {
@@ -9,16 +10,16 @@ import {
   fetchList,
 } from '../ducks/list';
 
-class SearchListContainer extends Component {
+class SearchListContainer extends PureComponent {
   componentDidMount() {
     this.fetchData();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.caegory !== prevProps.category) {
-  //     this.fetchData();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (this.props.category !== prevProps.category) {
+      this.fetchData();
+    }
+  }
 
   fetchData() {
     const { category, fetchList } = this.props;
@@ -31,8 +32,15 @@ class SearchListContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const category = 'all';
+const mapStateToProps = (
+  state,
+  {
+    match: {
+      params: { category },
+    },
+  }
+) => {
+  category = category || 'all';
   return {
     list: getVisibleList(state, category),
     isFetching: getIsFetching(state, category),
@@ -41,9 +49,11 @@ const mapStateToProps = state => {
   };
 };
 
-SearchListContainer = connect(
-  mapStateToProps,
-  { fetchList }
-)(SearchListContainer);
+SearchListContainer = withRouter(
+  connect(
+    mapStateToProps,
+    { fetchList }
+  )(SearchListContainer)
+);
 
 export default SearchListContainer;
