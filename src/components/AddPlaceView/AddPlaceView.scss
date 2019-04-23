@@ -1,0 +1,23 @@
+.placeSearchSection {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #fff;
+  width: 20%;
+  height: 100vh;
+  z-index: 100;
+
+  &.open {
+    display: block;
+  }
+
+  .searchInput {
+    background: #eee;
+  }
+
+  .placeSearchList {
+    height: 50vh;
+    overflow-y: auto;
+  }
+}
