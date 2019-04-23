@@ -4,6 +4,7 @@ import LayoutView from '../components/LayoutView/LayoutView';
 export default class LayoutContainer extends Component {
   state = {
     isNavMenuOpen: false,
+    isPlaceSearchOpen: false,
   };
 
   handleNavMenu() {
@@ -12,15 +13,23 @@ export default class LayoutContainer extends Component {
     }));
   }
 
+  handlePlaceSearchMenu() {
+    this.setState(prev => ({
+      isPlaceSearchOpen: !prev.isPlaceSearchOpen,
+    }));
+  }
+
   render() {
     const { children } = this.props;
-    const { isNavMenuOpen } = this.state;
+    const { isNavMenuOpen, isPlaceSearchOpen } = this.state;
 
     return (
       <>
         <LayoutView
           isNavMenuOpen={isNavMenuOpen}
           handleNavMenu={() => this.handleNavMenu()}
+          isPlaceSearchOpen={isPlaceSearchOpen}
+          handlePlaceSearchMenu={() => this.handlePlaceSearchMenu()}
         />
         {children}
       </>
