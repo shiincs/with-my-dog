@@ -1,12 +1,19 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 
+import AddPlaceContainer from '../../containers/AddPlaceContainer';
+
 import styles from './LayoutView.scss';
 
 const cx = classNames.bind(styles);
 
 const LayoutView = props => {
-  const { isNavMenuOpen, handleNavMenu } = props;
+  const {
+    isNavMenuOpen,
+    handleNavMenu,
+    isPlaceSearchOpen,
+    handlePlaceSearchMenu,
+  } = props;
 
   return (
     <>
@@ -29,12 +36,18 @@ const LayoutView = props => {
           <a onClick={() => handleNavMenu()}>닫기</a>
         </nav>
         <div className={cx('addPlaceButton')}>
-          <a className={cx('btn')}>장소 등록</a>
+          <a className={cx('btn')} onClick={() => handlePlaceSearchMenu()}>
+            장소 등록
+          </a>
         </div>
       </header>
       <div
         className={cx('navMenuOverlay', { open: isNavMenuOpen })}
         onClick={isNavMenuOpen ? () => handleNavMenu() : null}
+      />
+      <AddPlaceContainer
+        isPlaceSearchOpen={isPlaceSearchOpen}
+        handlePlaceSearchMenu={handlePlaceSearchMenu}
       />
     </>
   );
