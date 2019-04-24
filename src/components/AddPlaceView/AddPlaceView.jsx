@@ -47,7 +47,7 @@ class AddPlaceView extends Component {
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data);
         // 페이지 번호를 표출합니다
-        // displayPagination(pagination);
+        displayPagination(pagination);
       } else if (status === daum.maps.services.Status.ZERO_RESULT) {
         alert('검색 결과가 존재하지 않습니다.');
         return;
@@ -57,11 +57,41 @@ class AddPlaceView extends Component {
       }
     }
 
+    // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+    function displayPagination(pagination) {
+      const paginationEl = document.querySelector('.paginationList');
+
+      // 기존에 추가된 페이지번호를 삭제합니다
+      while (paginationEl.hasChildNodes()) {
+        paginationEl.removeChild(paginationEl.lastChild);
+      }
+
+      for (let i = 1; i <= pagination.last; i++) {
+        let itemEl = document.createElement('li');
+        itemEl.className = 'paginationItem';
+        let linkEl = document.createElement('a');
+        linkEl.className = 'paginationLink';
+        linkEl.innerHTML = i;
+
+        if (i === pagination.current) {
+          linkEl.classList.add('open');
+        } else {
+          linkEl.onclick = (function(i) {
+            return function() {
+              pagination.gotoPage(i);
+            };
+          })(i);
+        }
+        itemEl.appendChild(linkEl);
+        paginationEl.appendChild(itemEl);
+      }
+    }
+
     // 검색 결과 목록과 마커를 표출하는 함수입니다
     const displayPlaces = places => {
       let listEl = document.querySelector('.placeSearchList');
       let bounds = new daum.maps.LatLngBounds();
-      let listStr = '';
+
       // context api의 상태로 저장된 마커들을 불러온다.
       let markers = this.props.searchMarkers;
 
@@ -89,33 +119,13 @@ class AddPlaceView extends Component {
 
       // 검색결과 항목을 Element로 반환하는 함수입니다
       const getListItem = (index, places) => {
-        var el = document.createElement('li'),
-          itemStr =
-            '<span class="markerbg marker_' +
-            (index + 1) +
-            '"></span>' +
-            '<div class="info">' +
-            '   <h5>' +
-            places.place_name +
-            '</h5>';
-
-        if (places.road_address_name) {
-          itemStr +=
-            '    <span>' +
-            places.road_address_name +
-            '</span>' +
-            '   <span class="jibun gray">' +
-            places.address_name +
-            '</span>';
-        } else {
-          itemStr += '    <span>' + places.address_name + '</span>';
-        }
-
-        itemStr += '  <span class="tel">' + places.phone + '</span>' + '</div>';
-
-        el.innerHTML = itemStr;
-        el.className = 'item';
-
+        const el = document.createElement('li');
+        el.innerHTML = `<dl>
+            <dt>${places.place_name}</dt>
+            <dd>${places.road_address_name}</dd>
+            <dd>${places.address_name}</dd>
+          </dl>`;
+        el.className = 'searchListItem';
         return el;
       };
 
@@ -174,6 +184,7 @@ class AddPlaceView extends Component {
   render() {
     const { isPlaceSearchOpen, handlePlaceSearchMenu } = this.props;
     const { inputValue } = this.state;
+
     return (
       <section
         className={cx('placeSearchSection', { open: isPlaceSearchOpen })}
@@ -192,6 +203,7 @@ class AddPlaceView extends Component {
           </fieldset>
         </form>
         <ul className={cx('placeSearchList')} />
+        <ul className={cx('paginationList')} />
         <a onClick={() => handlePlaceSearchMenu()}>닫기</a>
       </section>
     );
