@@ -14,9 +14,9 @@ class MapProvider extends Component {
       map: null,
       searchMarkers: [],
       onMarker: false,
+      handleSearchMarkers: this.handleSearchMarkers,
       handleMap: this.handleMap,
       drawMarker: this.drawMarker,
-      handleSearchMarkers: this.handleSearchMarkers,
     };
   }
 
