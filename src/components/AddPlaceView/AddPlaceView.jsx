@@ -20,10 +20,10 @@ class AddPlaceView extends Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault(); // form tag 기본 동작 방지
+
     const ps = new daum.maps.services.Places();
     const map = this.props.map;
-    let markers = [];
 
     searchPlaces(this.state.inputValue);
 
@@ -43,7 +43,6 @@ class AddPlaceView extends Component {
     // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
     function placesSearchCB(data, status, pagination) {
       if (status === daum.maps.services.Status.OK) {
-        console.log(data);
         // 정상적으로 검색이 완료됐으면
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data);
@@ -59,16 +58,66 @@ class AddPlaceView extends Component {
     }
 
     // 검색 결과 목록과 마커를 표출하는 함수입니다
-    function displayPlaces(places) {
+    const displayPlaces = places => {
       let listEl = document.querySelector('.placeSearchList');
       let bounds = new daum.maps.LatLngBounds();
       let listStr = '';
+      // context api의 상태로 저장된 마커들을 불러온다.
+      let markers = this.props.searchMarkers;
+
+      // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+      const removeAllChildNods = el => {
+        while (el.hasChildNodes()) {
+          el.removeChild(el.lastChild);
+        }
+      };
 
       // 검색 결과 목록에 추가된 항목들을 제거합니다
       removeAllChildNods(listEl);
 
+      // 지도 위에 표시되고 있는 마커를 모두 제거합니다
+      const removeMarker = () => {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+        this.props.handleSearchMarkers(markers);
+      };
+
       // 지도에 표시되고 있는 마커를 제거합니다
       removeMarker();
+
+      // 검색결과 항목을 Element로 반환하는 함수입니다
+      const getListItem = (index, places) => {
+        var el = document.createElement('li'),
+          itemStr =
+            '<span class="markerbg marker_' +
+            (index + 1) +
+            '"></span>' +
+            '<div class="info">' +
+            '   <h5>' +
+            places.place_name +
+            '</h5>';
+
+        if (places.road_address_name) {
+          itemStr +=
+            '    <span>' +
+            places.road_address_name +
+            '</span>' +
+            '   <span class="jibun gray">' +
+            places.address_name +
+            '</span>';
+        } else {
+          itemStr += '    <span>' + places.address_name + '</span>';
+        }
+
+        itemStr += '  <span class="tel">' + places.phone + '</span>' + '</div>';
+
+        el.innerHTML = itemStr;
+        el.className = 'item';
+
+        return el;
+      };
 
       for (let i = 0; i < places.length; i++) {
         // 마커를 생성하고 지도에 표시합니다
@@ -77,6 +126,8 @@ class AddPlaceView extends Component {
           map,
           position: placePosition,
         });
+        // 생성된 마커를 배열에 저장한다.
+        markers.push(marker);
         let itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -107,7 +158,7 @@ class AddPlaceView extends Component {
         //   fragment.appendChild(itemEl);
         // }
 
-        // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+        // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
         listEl.appendChild(itemEl);
         listEl.scrollTop = 0;
 
@@ -115,53 +166,9 @@ class AddPlaceView extends Component {
         map.setBounds(bounds);
       }
 
-      // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-      function removeAllChildNods(el) {
-        while (el.hasChildNodes()) {
-          el.removeChild(el.lastChild);
-        }
-      }
-
-      // 지도 위에 표시되고 있는 마커를 모두 제거합니다
-      function removeMarker() {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
-        }
-        markers = [];
-      }
-
-      // 검색결과 항목을 Element로 반환하는 함수입니다
-      function getListItem(index, places) {
-        var el = document.createElement('li'),
-          itemStr =
-            '<span class="markerbg marker_' +
-            (index + 1) +
-            '"></span>' +
-            '<div class="info">' +
-            '   <h5>' +
-            places.place_name +
-            '</h5>';
-
-        if (places.road_address_name) {
-          itemStr +=
-            '    <span>' +
-            places.road_address_name +
-            '</span>' +
-            '   <span class="jibun gray">' +
-            places.address_name +
-            '</span>';
-        } else {
-          itemStr += '    <span>' + places.address_name + '</span>';
-        }
-
-        itemStr += '  <span class="tel">' + places.phone + '</span>' + '</div>';
-
-        el.innerHTML = itemStr;
-        el.className = 'item';
-
-        return el;
-      }
-    }
+      // 생성된 마커 배열을 상태에 저장한다.
+      this.props.handleSearchMarkers(markers);
+    };
   };
 
   render() {
