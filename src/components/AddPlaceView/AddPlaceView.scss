@@ -17,7 +17,36 @@
   }
 
   .placeSearchList {
-    height: 50vh;
+    max-height: 70vh;
     overflow-y: auto;
+    background: #eee;
+    padding: 10px;
+
+    .searchListItem {
+      width: 100%;
+      background: #fff;
+      margin-bottom: 10px;
+    }
+  }
+
+  .paginationList {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    .paginationItem {
+      border: 1px solid #181818;
+      margin-right: 10px;
+
+      .paginationLink {
+        display: inline-block;
+        padding: 5px;
+
+        &.open {
+          font-weight: 600;
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
