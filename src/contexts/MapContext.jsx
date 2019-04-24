@@ -12,12 +12,19 @@ class MapProvider extends Component {
     super(props);
     this.state = {
       map: null,
-      markers: [],
+      searchMarkers: [],
       onMarker: false,
       handleMap: this.handleMap,
       drawMarker: this.drawMarker,
+      handleSearchMarkers: this.handleSearchMarkers,
     };
   }
+
+  handleSearchMarkers = markers => {
+    this.setState({
+      searchMarkers: [...markers],
+    });
+  };
 
   handleMap = list => {
     /* 맵이 렌더링 될 엘리먼트 지정 */
@@ -109,10 +116,6 @@ class MapProvider extends Component {
       /* 일단 모든 오버레이를 꺼둔다 */
       overlay.setMap(null);
     }
-
-    this.setState({
-      markers: [...markers],
-    });
 
     const handleMarker = flag => {
       /* 현재 마커의 상태를 변경 (마커가 클릭되었는지 아닌지, 즉 오버레이가 떠있는지 상태를 확인) */
