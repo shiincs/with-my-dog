@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 
-import AddPlaceContainer from '../../containers/AddPlaceContainer';
+// import AddPlaceContainer from '../../containers/AddPlaceContainer';
 
 import styles from './LayoutView.scss';
 
@@ -45,10 +45,10 @@ const LayoutView = props => {
         className={cx('navMenuOverlay', { open: isNavMenuOpen })}
         onClick={isNavMenuOpen ? () => handleNavMenu() : null}
       />
-      <AddPlaceContainer
+      {/* <AddPlaceContainer
         isPlaceSearchOpen={isPlaceSearchOpen}
         handlePlaceSearchMenu={handlePlaceSearchMenu}
-      />
+      /> */}
     </>
   );
 };

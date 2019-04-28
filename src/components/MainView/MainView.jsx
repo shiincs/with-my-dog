@@ -17,7 +17,7 @@ const MainView = props => {
         <CategoryNavContainer {...props} />
         <SearchFormContainer />
         <SearchListContainer {...props} />
-        <MapContainer />
+        {/* <MapContainer /> */}
       </LayoutContianer>
     </div>
   );
