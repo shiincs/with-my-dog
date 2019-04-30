@@ -199,7 +199,7 @@ class AddPlaceView extends Component {
               value={inputValue}
               onChange={e => this.handleChange(e)}
             />
-            <button>검색</button>
+            {/* <button>검색</button> */}
           </fieldset>
         </form>
         <ul className={cx('placeSearchList')} />
