@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import LayoutContianer from '../../containers/LayoutContainer';
 import MapContainer from '../../containers/MapContainer';
 import styles from './MainView.scss';
-import SearchFormContainer from '../../containers/SearchFormContainer';
+// import SearchFormContainer from '../../containers/SearchFormContainer';
 import SearchListContainer from '../../containers/SearchListContainer';
 import CategoryNavContainer from '../../containers/CategoryNavContainer';
 
@@ -15,9 +15,9 @@ const MainView = props => {
     <div className={cx('mainWrapper')}>
       <LayoutContianer>
         <CategoryNavContainer {...props} />
-        <SearchFormContainer />
+        {/* <SearchFormContainer /> */}
         <SearchListContainer {...props} />
-        {/* <MapContainer /> */}
+        <MapContainer />
       </LayoutContianer>
     </div>
   );
